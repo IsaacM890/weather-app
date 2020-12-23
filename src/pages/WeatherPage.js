@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Headline from '../components/Headline/Headline';
 import Header from '../components/Header/Header';
 import Searchinput from '../components/Searchinput/Searchinput';
 import ForecastList from '../components/ForecastList/ForecastList';
 import CurrentForcast from '../components/CurrentForcast/CurrentForcast';
+import { getAutoCompleteList } from '../api/index';
 
 const SLocationBox = styled.div`
   margin-top: 50px;
@@ -16,20 +17,26 @@ const SPageContainer = styled.div`
   margin: 0 20px 20px;
 `;
 const WeatherPage = () => {
+  const [autoCompleteList, setautoCompleteList] = useState([]);
+
+  const onSearch = async (e) => {
+    const response = await getAutoCompleteList(e.target.value);
+    console.log(response.data);
+    setautoCompleteList(response.data);
+  };
+
   return (
     <SPageContainer>
       <Header padding={'20px 0'}>
-        <Headline
-          color={'white'}
-          text='WEATHER APP'
-          fontsize={'18px'} 
-        />
+        <Headline color={'white'} text='WEATHER APP' fontsize={'18px'} />
       </Header>
       <Searchinput
         width={'30%'}
         height={'30px'}
         border={'none'}
         radius={'40px'}
+        onChange={onSearch}
+        autoCompleteList={autoCompleteList}
       />
       <SLocationBox>
         <Headline
@@ -38,11 +45,7 @@ const WeatherPage = () => {
           fontsize={'45px'}
           fontweight={'bold'}
         />
-        <Headline
-          color={'white'}
-          text='Wednesday 1 April'
-          fontsize={'20px'}
-        />
+        <Headline color={'white'} text='Wednesday 1 April' fontsize={'20px'} />
       </SLocationBox>
       <CurrentForcast
         borderradius={'10px'}

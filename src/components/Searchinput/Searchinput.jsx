@@ -44,7 +44,14 @@ export default function Searchinput(props) {
       radius={props.radius}
     >
       <SSearchicon src={icon} alt='search icon' />
-      <SSearchinput placeholder={'Type Here ... '}></SSearchinput>
+      <SSearchinput
+        onKeyPress={props.onKeyPress}
+        onChange={props.onChange}
+        placeholder={'Type Here ... '}
+      ></SSearchinput>
+      <ul>
+        
+      </ul>
     </SInputWrapper>
   );
 }
