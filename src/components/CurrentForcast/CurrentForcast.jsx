@@ -58,8 +58,8 @@ const SCaptionWrapper = styled.div`
 `;
 
 const SCaptionGroup = styled.div`
-align-items:center;
-flex-direction: column;
+  align-items: center;
+  flex-direction: column;
   &:first-child {
     @media (max-width: 768px) {
       margin-bottom: 1rem;
@@ -73,7 +73,12 @@ const CurrentForcast = (props) => {
       <SGeneralForcast>
         <SCloudicon src={cloudicon} alt={'forcast icon'} />
         <div>
-          <Headline text={'5'} fontsize={'70px'} degree />
+          <Headline
+            text={props.currentForcast.Temperature?.Metric.Value}
+            //text={'5'}
+            fontsize={'70px'}
+            degree
+          />
           <Headline text={'Overcast Clouds'} fontsize={'28px'} />
         </div>
       </SGeneralForcast>

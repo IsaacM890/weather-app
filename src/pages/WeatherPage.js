@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Headline from '../components/Headline/Headline';
 import Header from '../components/Header/Header';
 import Searchinput from '../components/Searchinput/Searchinput';
 import ForecastList from '../components/ForecastList/ForecastList';
 import CurrentForcast from '../components/CurrentForcast/CurrentForcast';
-import { getAutoCompleteList } from '../api/index';
+import { getAutoCompleteList, getCurrentConditions } from '../api/index';
 
 const SLocationBox = styled.div`
   margin-top: 50px;
@@ -16,14 +16,34 @@ const SLocationBox = styled.div`
 const SPageContainer = styled.div`
   margin: 0 20px 20px;
 `;
+
 const WeatherPage = () => {
   const [autoCompleteList, setautoCompleteList] = useState([]);
+  const [selectedSearchInputValue, setselectedSearchInputValue] = useState('');
+  const [currentconditions, setcurrentconditions] = useState({});
 
-  const onSearch = async (e) => {
+  useEffect(() => {
+   getForcast(215854);
+  }, []);
+
+  const onChange = async (e) => {
+    setselectedSearchInputValue(e.target.value);
     const response = await getAutoCompleteList(e.target.value);
     console.log(response.data);
     setautoCompleteList(response.data);
   };
+
+  const onSelectOption = async (option) => {
+    getForcast(option.Key);
+    setselectedSearchInputValue(option.LocalizedName);
+  };
+  
+  const getForcast = async (key) => {
+    const response = await getCurrentConditions(key);
+    console.log(response.data[0]);
+    setcurrentconditions(response.data[0]);
+  }
+
 
   return (
     <SPageContainer>
@@ -35,8 +55,11 @@ const WeatherPage = () => {
         height={'30px'}
         border={'none'}
         radius={'40px'}
-        onChange={onSearch}
+        onChange={onChange}
         autoCompleteList={autoCompleteList}
+        onSelectOption={onSelectOption}
+        value={selectedSearchInputValue}
+        // onKeyPress={}
       />
       <SLocationBox>
         <Headline
@@ -48,6 +71,7 @@ const WeatherPage = () => {
         <Headline color={'white'} text='Wednesday 1 April' fontsize={'20px'} />
       </SLocationBox>
       <CurrentForcast
+        currentForcast={currentconditions}
         borderradius={'10px'}
         color={'white'}
         backgroundcolor={'rgba(255,255,255,0.3)'}
