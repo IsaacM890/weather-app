@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Headline from '../Headline/Headline';
 import Card from '../Card/Card';
 import Caption from '../Caption/Caption';
+import helpersFuncs from '../../helpers/index';
 
 const SCardcontainer = styled.div`
   display: flex;
@@ -50,21 +51,6 @@ const SCaptionBox = styled.div`
 `;
 
 const ForecastList = (props) => {
-  const getDate = (item, type) => {
-    const typePattern = {
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    };
-    const dateObj = new Date(item.DateTime);
-    const fullDate = dateObj.toLocaleDateString('en-us', typePattern);
-    const time = fullDate.slice(7);
-    const date = fullDate.slice(0, 5);
-
-    return type === 'time' ? time : date;
-  };
-
   return (
     <SForecastListContainer>
       <Headline
@@ -87,8 +73,14 @@ const ForecastList = (props) => {
             >
               <SCaptionBox>
                 <SCaptionGroup>
-                  <Caption color={'white'} text={getDate(item, 'date')} />
-                  <Caption color={'white'} text={getDate(item, 'time')} />
+                  <Caption
+                    color={'white'}
+                    text={helpersFuncs.getDate(item, 'date')}
+                  />
+                  <Caption
+                    color={'white'}
+                    text={helpersFuncs.getDate(item, 'time')}
+                  />
                 </SCaptionGroup>
                 <SCardIcon
                   src={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon}-s.png`}

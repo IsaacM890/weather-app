@@ -23,6 +23,7 @@ const SPageContainer = styled.div`
 `;
 
 const WeatherPage = () => {
+  
   const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
   const date = new Date().toLocaleDateString('en-us', dateOptions);
 
