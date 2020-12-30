@@ -67,7 +67,6 @@ const SCaptionGroup = styled.div`
 `;
 
 const CurrentForcast = (props) => {
-  
   const timePattern = { hour: 'numeric', minute: 'numeric' };
   const riseTime = new Date(props.dailyForcast.DailyForecasts[0]?.Sun.Rise);
   const riseToDisplay = riseTime.toLocaleTimeString('en-us', timePattern);

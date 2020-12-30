@@ -50,10 +50,20 @@ const SCaptionBox = styled.div`
 `;
 
 const ForecastList = (props) => {
-  
-  const timePattern = { hour: 'numeric', minute: 'numeric' };
-  const time = new Date(props.hourlyForcast.DateTime);
-  const riseToDisplay = time.toLocaleTimeString('en-us', timePattern);
+  const getDate = (item, type) => {
+    const typePattern = {
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    const dateObj = new Date(item.DateTime);
+    const fullDate = dateObj.toLocaleDateString('en-us', typePattern);
+    const time = fullDate.slice(7);
+    const date = fullDate.slice(0, 5);
+
+    return type === 'time' ? time : date;
+  };
 
   return (
     <SForecastListContainer>
@@ -77,8 +87,8 @@ const ForecastList = (props) => {
             >
               <SCaptionBox>
                 <SCaptionGroup>
-                  <Caption color={'white'} text={item.Date} />
-                  <Caption color={'white'} text={riseToDisplay} />
+                  <Caption color={'white'} text={getDate(item, 'date')} />
+                  <Caption color={'white'} text={getDate(item, 'time')} />
                 </SCaptionGroup>
                 <SCardIcon
                   src={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon}-s.png`}
