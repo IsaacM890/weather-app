@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Headline from '../Headline/Headline';
-import cloudicon from '../../assets/images/cloud.png';
 import Caption from '../Caption/Caption';
 
 const SContainer = styled.div`
@@ -68,13 +67,13 @@ const SCaptionGroup = styled.div`
 `;
 
 const CurrentForcast = (props) => {
+  
   const timePattern = { hour: 'numeric', minute: 'numeric' };
   const riseTime = new Date(props.dailyForcast.DailyForecasts[0]?.Sun.Rise);
-  const riseToDisplay = riseTime.toLocaleTimeString('he-il', timePattern);
+  const riseToDisplay = riseTime.toLocaleTimeString('en-us', timePattern);
   const setTime = new Date(props.dailyForcast.DailyForecasts[0]?.Sun.Set);
-  const setToDisplay = setTime.toLocaleTimeString('he-il', timePattern);
+  const setToDisplay = setTime.toLocaleTimeString('en-us', timePattern);
 
-  console.log(props.dailyForcast);
   return (
     <SContainer color={props.color}>
       <SGeneralForcast>
@@ -85,7 +84,6 @@ const CurrentForcast = (props) => {
         <div>
           <Headline
             text={props.currentForcast.Temperature?.Metric.Value}
-            //text={'5'}
             fontsize={'70px'}
             degree
           />
@@ -121,14 +119,14 @@ const CurrentForcast = (props) => {
         <SCaptionWrapper>
           <SCaptionGroup>
             <Caption
-              text={props.dailyForcast.DailyForecasts[0]?.Day.Wind.Speed.Value}
+              text={`${props.dailyForcast.DailyForecasts[0]?.Day.Wind.Speed.Value} mi/h`}
               fontsize={'16px'}
             ></Caption>
             <Caption text={'Wind'} fontsize={'16px'} />
           </SCaptionGroup>
           <SCaptionGroup>
             <Caption
-              text={props.dailyForcast.DailyForecasts[0]?.Day.RainProbability}
+              text={`${props.dailyForcast.DailyForecasts[0]?.Day.RainProbability} %`}
               fontsize={'16px'}
             ></Caption>
             <Caption text={'Rain'} fontsize={'16px'} />

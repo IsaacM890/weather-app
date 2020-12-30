@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Headline from '../Headline/Headline';
-import cloudicon from '../../assets/images/cloud.png';
 import Card from '../Card/Card';
 import Caption from '../Caption/Caption';
 
@@ -50,24 +49,12 @@ const SCaptionBox = styled.div`
   padding-bottom: 10px;
 `;
 
-const mock = [
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-  { Date: '02.07', Hour: '6:00', Temp: '6' },
-];
-
 const ForecastList = (props) => {
+  
+  const timePattern = { hour: 'numeric', minute: 'numeric' };
+  const time = new Date(props.hourlyForcast.DateTime);
+  const riseToDisplay = time.toLocaleTimeString('en-us', timePattern);
+
   return (
     <SForecastListContainer>
       <Headline
@@ -77,7 +64,7 @@ const ForecastList = (props) => {
         fontsize={'28px'}
       />
       <SCardcontainer>
-        {mock.map((item, index) => {
+        {props.hourlyForcast.map((item, index) => {
           return (
             <Card
               margin={'3px'}
@@ -91,10 +78,13 @@ const ForecastList = (props) => {
               <SCaptionBox>
                 <SCaptionGroup>
                   <Caption color={'white'} text={item.Date} />
-                  <Caption color={'white'} text={item.Hour} />
+                  <Caption color={'white'} text={riseToDisplay} />
                 </SCaptionGroup>
-                <SCardIcon src={cloudicon} alt={item.Icon} />
-                <Caption color={'white'} text={item.Temp} degree />
+                <SCardIcon
+                  src={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon}-s.png`}
+                  alt={'icon'}
+                />
+                <Caption color={'white'} text={item.Temperature.Value} degree />
               </SCaptionBox>
             </Card>
           );

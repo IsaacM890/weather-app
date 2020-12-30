@@ -45,7 +45,7 @@ const WeatherPage = () => {
   const onSelectOption = async (option) => {
     await getForcast(option.Key);
     await getDailyForcast(option.Key);
-    getgetHourlyForecasts(option.Key);
+    await getgetHourlyForecasts(option.Key);
     setselectedSearchInputValue(option.LocalizedName);
     setselectedLocation(option);
     setisDone(true);
@@ -83,7 +83,6 @@ const WeatherPage = () => {
         autoCompleteList={autoCompleteList}
         onSelectOption={onSelectOption}
         value={selectedSearchInputValue}
-        // onKeyPress={}
       />
       {isDone ? (
         <>
