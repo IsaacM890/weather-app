@@ -68,10 +68,20 @@ const SCaptionGroup = styled.div`
 `;
 
 const CurrentForcast = (props) => {
+  const timePattern = { hour: 'numeric', minute: 'numeric' };
+  const riseTime = new Date(props.dailyForcast.DailyForecasts[0]?.Sun.Rise);
+  const riseToDisplay = riseTime.toLocaleTimeString('he-il', timePattern);
+  const setTime = new Date(props.dailyForcast.DailyForecasts[0]?.Sun.Set);
+  const setToDisplay = setTime.toLocaleTimeString('he-il', timePattern);
+
+  console.log(props.dailyForcast);
   return (
     <SContainer color={props.color}>
       <SGeneralForcast>
-        <SCloudicon src={cloudicon} alt={'forcast icon'} />
+        <SCloudicon
+          src={`https://developer.accuweather.com/sites/default/files/${props.currentForcast.WeatherIcon}-s.png`}
+          alt={'forcast icon'}
+        />
         <div>
           <Headline
             text={props.currentForcast.Temperature?.Metric.Value}
@@ -79,7 +89,7 @@ const CurrentForcast = (props) => {
             fontsize={'70px'}
             degree
           />
-          <Headline text={'Overcast Clouds'} fontsize={'28px'} />
+          <Headline text={props.currentForcast.WeatherText} fontsize={'28px'} />
         </div>
       </SGeneralForcast>
       <SExtendedForcast
@@ -88,31 +98,49 @@ const CurrentForcast = (props) => {
       >
         <SCaptionWrapper>
           <SCaptionGroup>
-            <Caption text={'5'} fontsize={'16px'} degree></Caption>
+            <Caption
+              text={
+                props.dailyForcast.DailyForecasts[0]?.Temperature.Maximum.Value
+              }
+              fontsize={'16px'}
+              degree
+            ></Caption>
             <Caption text={'Hight'} fontsize={'16px'} />
           </SCaptionGroup>
           <SCaptionGroup>
-            <Caption text={'5'} fontsize={'16px'} degree></Caption>
+            <Caption
+              text={
+                props.dailyForcast.DailyForecasts[0]?.Temperature.Minimum.Value
+              }
+              fontsize={'16px'}
+              degree
+            ></Caption>
             <Caption text={'Low'} fontsize={'16px'} />
           </SCaptionGroup>
         </SCaptionWrapper>
         <SCaptionWrapper>
           <SCaptionGroup>
-            <Caption text={'31.mph'} fontsize={'16px'}></Caption>
+            <Caption
+              text={props.dailyForcast.DailyForecasts[0]?.Day.Wind.Speed.Value}
+              fontsize={'16px'}
+            ></Caption>
             <Caption text={'Wind'} fontsize={'16px'} />
           </SCaptionGroup>
           <SCaptionGroup>
-            <Caption text={'70%'} fontsize={'16px'}></Caption>
+            <Caption
+              text={props.dailyForcast.DailyForecasts[0]?.Day.RainProbability}
+              fontsize={'16px'}
+            ></Caption>
             <Caption text={'Rain'} fontsize={'16px'} />
           </SCaptionGroup>
         </SCaptionWrapper>
         <SCaptionWrapper>
           <SCaptionGroup>
-            <Caption text={'18:00:'} fontsize={'16px'}></Caption>
+            <Caption text={setToDisplay} fontsize={'16px'}></Caption>
             <Caption text={'Sunset'} fontsize={'16px'} />
           </SCaptionGroup>
           <SCaptionGroup>
-            <Caption text={' 6:00:'} fontsize={'16px'}></Caption>
+            <Caption text={riseToDisplay} fontsize={'16px'}></Caption>
             <Caption text={'Sunrise'} fontsize={'16px'} />
           </SCaptionGroup>
         </SCaptionWrapper>

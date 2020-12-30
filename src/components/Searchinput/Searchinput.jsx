@@ -67,7 +67,10 @@ export default function Searchinput(props) {
   const suggestions = props.autoCompleteList
     ? props.autoCompleteList.map((item, index) => {
         return (
-          <SDropDownItem onMouseDown={() => props.onSelectOption(item)} key={index}>
+          <SDropDownItem
+            onMouseDown={() => props.onSelectOption(item)}
+            key={index}
+          >
             {item.LocalizedName}
           </SDropDownItem>
         );

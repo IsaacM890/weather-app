@@ -49,6 +49,7 @@ const SCaptionBox = styled.div`
   width: 100%;
   padding-bottom: 10px;
 `;
+
 const mock = [
   { Date: '02.07', Hour: '6:00', Temp: '6' },
   { Date: '02.07', Hour: '6:00', Temp: '6' },
