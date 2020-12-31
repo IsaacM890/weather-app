@@ -23,7 +23,6 @@ const SPageContainer = styled.div`
 `;
 
 const WeatherPage = () => {
-  
   const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
   const date = new Date().toLocaleDateString('en-us', dateOptions);
 
@@ -46,7 +45,7 @@ const WeatherPage = () => {
   const onSelectOption = async (option) => {
     await getForcast(option.Key);
     await getDailyForcast(option.Key);
-    await getgetHourlyForecasts(option.Key);
+    await getHourlyForecasts(option.Key);
     setselectedSearchInputValue(option.LocalizedName);
     setselectedLocation(option);
     setisDone(true);
@@ -64,7 +63,7 @@ const WeatherPage = () => {
     setdailyForcast(response.data);
   };
 
-  const getgetHourlyForecasts = async (key) => {
+  const getHourlyForecasts = async (key) => {
     const response = await getHourlyForecastsAPI(key);
     console.log(response.data);
     sethourlyForcast(response.data);

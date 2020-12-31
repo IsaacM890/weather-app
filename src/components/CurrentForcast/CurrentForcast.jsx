@@ -77,7 +77,7 @@ const CurrentForcast = (props) => {
     <SContainer color={props.color}>
       <SGeneralForcast>
         <SCloudicon
-          src={`https://developer.accuweather.com/sites/default/files/${props.currentForcast.WeatherIcon}-s.png`}
+          src={`http://vortex.accuweather.com/adc2010/images/slate/icons/${props.currentForcast.WeatherIcon}.svg`}
           alt={'forcast icon'}
         />
         <div>

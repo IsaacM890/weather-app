@@ -8,33 +8,42 @@ import helpersFuncs from '../../helpers/index';
 const SCardcontainer = styled.div`
   display: flex;
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-  }
+  @media (max-width: 1450px) {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
 
-  &::-webkit-scrollbar {
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #f18374;
+    &::-webkit-scrollbar {
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #f18374;
+    }
   }
 `;
 
 const SCardIcon = styled.img`
   display: flex;
-  width: 20px;
-  height: 20px;
+  height: 30px;
 `;
 
 const SForecastListContainer = styled.div`
   margin-top: 40px;
+  margin-left: 25px;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0px;
+  }
 `;
 
 const SCaptionGroup = styled.div`
@@ -83,7 +92,7 @@ const ForecastList = (props) => {
                   />
                 </SCaptionGroup>
                 <SCardIcon
-                  src={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon}-s.png`}
+                  src={`http://vortex.accuweather.com/adc2010/images/slate/icons/${item.WeatherIcon}.svg`}
                   alt={'icon'}
                 />
                 <Caption color={'white'} text={item.Temperature.Value} degree />
