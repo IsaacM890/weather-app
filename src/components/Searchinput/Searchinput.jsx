@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import icon from '../../assets/images/search-icon-png-9982.png';
 
-const SSearchinput = styled.input`
+const SSearchInput = styled.input`
   width: 100%;
   height: 100%;
   border: none;
@@ -65,9 +65,12 @@ const SDropDownItem = styled.li`
 
 export default function Searchinput(props) {
   const suggestions = props.autoCompleteList
-    ? props.autoCompleteList.map((item, index) => {
+    ? props.autoCompleteList.map((item) => {
         return (
-          <SDropDownItem onMouseDown={() => props.onSelectOption(item)} key={index}>
+          <SDropDownItem
+            onMouseDown={() => props.onSelectOption(item)}
+            key={item.Key}
+          >
             {item.LocalizedName}
           </SDropDownItem>
         );
@@ -81,12 +84,11 @@ export default function Searchinput(props) {
       radius={props.radius}
     >
       <SSearchicon src={icon} alt='search icon' />
-      <SSearchinput
-        onKeyPress={props.onKeyPress}
+      <SSearchInput
         onChange={props.onChange}
-        placeholder={'Type Here ... '}
+        placeholder={'Search ... '}
         value={props.value}
-      ></SSearchinput>
+      ></SSearchInput>
       <SDropdownList>{suggestions}</SDropdownList>
     </SInputWrapper>
   );

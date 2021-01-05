@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Headline from '../Headline/Headline';
 import Caption from '../Caption/Caption';
+import helpersFuncs from '../../helpers/index';
 
 const SContainer = styled.div`
   color: ${(props) => props.color};
@@ -17,7 +18,7 @@ const SContainer = styled.div`
   width: ${(props) => props.width};
 `;
 
-const SCloudicon = styled.img`
+const SCloudIcon = styled.img`
   width: 120px;
   height: 120px;
   margin-right: 20px;
@@ -66,79 +67,87 @@ const SCaptionGroup = styled.div`
   }
 `;
 
-const CurrentForcast = (props) => {
-  const timePattern = { hour: 'numeric', minute: 'numeric' };
-  const riseTime = new Date(props.dailyForcast.DailyForecasts[0]?.Sun.Rise);
-  const riseToDisplay = riseTime.toLocaleTimeString('en-us', timePattern);
-  const setTime = new Date(props.dailyForcast.DailyForecasts[0]?.Sun.Set);
-  const setToDisplay = setTime.toLocaleTimeString('en-us', timePattern);
-
+const CurrentForcast = ({
+  color,
+  currentForcast,
+  dailyForcast,
+  backgroundcolor,
+  borderradius,
+}) => {
   return (
-    <SContainer color={props.color}>
+    <SContainer color={color}>
       <SGeneralForcast>
-        <SCloudicon
-          src={`http://vortex.accuweather.com/adc2010/images/slate/icons/${props.currentForcast.WeatherIcon}.svg`}
+        <SCloudIcon
+          src={helpersFuncs.getWeatherIcon(currentForcast.WeatherIcon)}
           alt={'forcast icon'}
         />
         <div>
           <Headline
-            text={props.currentForcast.Temperature?.Metric.Value}
-            fontsize={'70px'}
+            text={currentForcast.Temperature?.Metric.Value}
+            fontsize={'XLarge'}
             degree
           />
-          <Headline text={props.currentForcast.WeatherText} fontsize={'28px'} />
+          <Headline text={currentForcast.WeatherText} fontsize={'XMedium'} />
         </div>
       </SGeneralForcast>
       <SExtendedForcast
-        backgroundcolor={props.backgroundcolor}
-        borderradius={props.borderradius}
+        backgroundcolor={backgroundcolor}
+        borderradius={borderradius}
       >
         <SCaptionWrapper>
           <SCaptionGroup>
             <Caption
-              text={
-                props.dailyForcast.DailyForecasts[0]?.Temperature.Maximum.Value
-              }
+              text={dailyForcast.DailyForecasts[0]?.Temperature.Maximum.Value}
               fontsize={'16px'}
               degree
             ></Caption>
-            <Caption text={'Hight'} fontsize={'16px'} />
+            <Caption text={'Hight'} />
           </SCaptionGroup>
           <SCaptionGroup>
             <Caption
-              text={
-                props.dailyForcast.DailyForecasts[0]?.Temperature.Minimum.Value
-              }
+              text={dailyForcast.DailyForecasts[0]?.Temperature.Minimum.Value}
               fontsize={'16px'}
               degree
             ></Caption>
-            <Caption text={'Low'} fontsize={'16px'} />
+            <Caption text={'Low'} />
           </SCaptionGroup>
         </SCaptionWrapper>
         <SCaptionWrapper>
           <SCaptionGroup>
             <Caption
-              text={`${props.dailyForcast.DailyForecasts[0]?.Day.Wind.Speed.Value} mi/h`}
+              text={`${dailyForcast.DailyForecasts[0]?.Day.Wind.Speed.Value} mi/h`}
               fontsize={'16px'}
             ></Caption>
-            <Caption text={'Wind'} fontsize={'16px'} />
+            <Caption text={'Wind'} />
           </SCaptionGroup>
           <SCaptionGroup>
             <Caption
-              text={`${props.dailyForcast.DailyForecasts[0]?.Day.RainProbability} %`}
+              text={`${dailyForcast.DailyForecasts[0]?.Day.RainProbability} %`}
               fontsize={'16px'}
             ></Caption>
-            <Caption text={'Rain'} fontsize={'16px'} />
+            <Caption text={'Rain'} />
           </SCaptionGroup>
         </SCaptionWrapper>
         <SCaptionWrapper>
           <SCaptionGroup>
-            <Caption text={setToDisplay} fontsize={'16px'}></Caption>
-            <Caption text={'Sunset'} fontsize={'16px'} />
+            <Caption
+              text={helpersFuncs.getDate(
+                dailyForcast.DailyForecasts[0].Sun.Set,
+                'time'
+              )}
+              fontsize={'16px'}
+            ></Caption>
+            <Caption text={'Sunset'} />
           </SCaptionGroup>
           <SCaptionGroup>
-            <Caption text={riseToDisplay} fontsize={'16px'}></Caption>
-            <Caption text={'Sunrise'} fontsize={'16px'} />
+            <Caption
+              text={helpersFuncs.getDate(
+                dailyForcast.DailyForecasts[0].Sun.Rise,
+                'time'
+              )}
+              fontsize={'16px'}
+            ></Caption>
+            <Caption text={'Sunrise'} />
           </SCaptionGroup>
         </SCaptionWrapper>
       </SExtendedForcast>

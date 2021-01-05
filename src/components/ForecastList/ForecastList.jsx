@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Headline from '../Headline/Headline';
 import Card from '../Card/Card';
-import Caption from '../Caption/Caption';
-import helpersFuncs from '../../helpers/index';
 
 const SCardcontainer = styled.div`
   display: flex;
@@ -31,45 +29,22 @@ const SCardcontainer = styled.div`
   }
 `;
 
-const SCardIcon = styled.img`
-  display: flex;
-  height: 30px;
-`;
-
 const SForecastListContainer = styled.div`
   margin-top: 40px;
   margin-left: 25px;
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    margin-left: 0px;
+    margin-left: 0;
   }
-`;
-
-const SCaptionGroup = styled.div`
-  margin-top: 5px;
-`;
-
-const SCaptionBox = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  padding-bottom: 10px;
 `;
 
 const ForecastList = (props) => {
   return (
     <SForecastListContainer>
-      <Headline
-        text={'Forecast'}
-        color={'white'}
-        margin={'15px 0'}
-        fontsize={'28px'}
-      />
+      <Headline text={'Forecast'} color={'white'} fontsize={'XMedium'} />
       <SCardcontainer>
-        {props.hourlyForcast.map((item, index) => {
+        {props.hourlyForcast.map((item) => {
           return (
             <Card
               margin={'3px'}
@@ -78,26 +53,9 @@ const ForecastList = (props) => {
               min-width={' 110px'}
               height={'18vh'}
               backgroundcolor={'rgba(255, 255, 255, 0.3)'}
-              key={index}
-            >
-              <SCaptionBox>
-                <SCaptionGroup>
-                  <Caption
-                    color={'white'}
-                    text={helpersFuncs.getDate(item, 'date')}
-                  />
-                  <Caption
-                    color={'white'}
-                    text={helpersFuncs.getDate(item, 'time')}
-                  />
-                </SCaptionGroup>
-                <SCardIcon
-                  src={`http://vortex.accuweather.com/adc2010/images/slate/icons/${item.WeatherIcon}.svg`}
-                  alt={'icon'}
-                />
-                <Caption color={'white'} text={item.Temperature.Value} degree />
-              </SCaptionBox>
-            </Card>
+              key={item.DateTime}
+              item={item}
+            />
           );
         })}
       </SCardcontainer>

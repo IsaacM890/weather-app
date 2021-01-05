@@ -1,21 +1,14 @@
-import Axios from 'axios';
+import { baseURL, endPoints } from './config';
+import axios from 'axios';
 
-export const getAutoCompleteList = (input) =>
-  Axios.get(
-    `ushttp://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_API_KEY}&q=${input}`
-  );
+export const AutoCompleteListAPI = (query) =>
+  axios.get(baseURL.autocompleteSearchURL+endPoints.searchPoint+query);
 
-export const getCurrentConditions = (Key) =>
-  Axios.get(
-    `http://dataservice.accuweather.com/currentconditions/v1/${Key}?apikey=${process.env.REACT_APP_API_KEY}&details=true`
-  );
+export const CurrentConditionsAPI= (cityKey) =>
+  axios.get(baseURL.currentConditionsURL+cityKey+endPoints.basic);
 
-export const getDailyForcastAPI = (Key) =>
-  Axios.get(
-    `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${Key}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`
-  );
+export const DailyForcastAPI = (cityKey) =>
+  axios.get(baseURL.dailyForcastURL+cityKey+endPoints.basic);
 
-export const getHourlyForecastsAPI = (Key) =>
-  Axios.get(
-    `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${Key}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`
-  );
+export const HourlyForecastAPI = (cityKey) =>
+  axios.get(baseURL.hourlyForecastsURL+cityKey+endPoints.basic);
