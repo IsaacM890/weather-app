@@ -9,7 +9,6 @@ export const getDate = (datetime, type) => {
       minute: 'numeric',
     },
   };
-  debugger;
   const dateObj = new Date(datetime);
 
   const date = dateObj.toLocaleDateString('en-us', typePattern.date);

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Headline from '../Headline/Headline';
 import Caption from '../Caption/Caption';
 import helpersFuncs from '../../helpers/index';
+import theme from '../../helpers/theme';
 
 const SContainer = styled.div(
   ({ color, width }) => `
@@ -12,7 +13,7 @@ display: flex;
   padding: 20px;
 }
 margin: 20px;
-@media (max-width: 768px) {
+@media (max-width: ${theme.breakpoints.tablet}) {
   flex-direction: column;
   align-items: center;
 }
@@ -30,7 +31,7 @@ const SGeneralForcast = styled.div`
   align-items: center;
   justify-content: center;
   width: 50%;
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     width: 100%;
   }
 `;
@@ -47,7 +48,7 @@ align-items: center;
 justify-content: space-between;
 background-color: ${backgroundcolor};
 border-radius: ${borderradius};
-@media (max-width: 768px) {
+@media (max-width: ${theme.breakpoints.tablet}) {
   width: 100%;
 }`
 );
@@ -63,7 +64,7 @@ const SCaptionGroup = styled.div`
   align-items: center;
   flex-direction: column;
   &:first-child {
-    @media (max-width: 768px) {
+    @media (max-width: ${theme.breakpoints.tablet}) {
       margin-bottom: 1rem;
     }
   }
@@ -100,7 +101,6 @@ const CurrentForcast = ({
           <SCaptionGroup>
             <Caption
               text={dailyForcast.DailyForecasts[0]?.Temperature.Maximum.Value}
-              fontsize={'16px'}
               degree
             ></Caption>
             <Caption text={'Hight'} />
@@ -108,7 +108,6 @@ const CurrentForcast = ({
           <SCaptionGroup>
             <Caption
               text={dailyForcast.DailyForecasts[0]?.Temperature.Minimum.Value}
-              fontsize={'16px'}
               degree
             ></Caption>
             <Caption text={'Low'} />
@@ -118,14 +117,12 @@ const CurrentForcast = ({
           <SCaptionGroup>
             <Caption
               text={`${dailyForcast.DailyForecasts[0]?.Day.Wind.Speed.Value} mi/h`}
-              fontsize={'16px'}
             ></Caption>
             <Caption text={'Wind'} />
           </SCaptionGroup>
           <SCaptionGroup>
             <Caption
               text={`${dailyForcast.DailyForecasts[0]?.Day.RainProbability} %`}
-              fontsize={'16px'}
             ></Caption>
             <Caption text={'Rain'} />
           </SCaptionGroup>
@@ -137,7 +134,6 @@ const CurrentForcast = ({
                 dailyForcast.DailyForecasts[0].Sun.Set,
                 'time'
               )}
-              fontsize={'16px'}
             ></Caption>
             <Caption text={'Sunset'} />
           </SCaptionGroup>
@@ -147,7 +143,6 @@ const CurrentForcast = ({
                 dailyForcast.DailyForecasts[0].Sun.Rise,
                 'time'
               )}
-              fontsize={'16px'}
             ></Caption>
             <Caption text={'Sunrise'} />
           </SCaptionGroup>

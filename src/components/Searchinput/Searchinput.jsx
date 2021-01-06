@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import icon from '../../assets/images/search-icon-png-9982.png';
+import theme from '../../helpers/theme';
 
 const SSearchInput = styled.input`
   width: 100%;
@@ -16,13 +17,13 @@ const SSearchicon = styled.img`
   width: 20px;
   height: 20px;
   position: absolute;
-  left: 5px;
+  left: 10px;
 `;
 
 const SInputWrapper = styled.div(
   ({ width, height, border, radius }) => `
 margin: 80px auto 0;
-background-color: white;
+background-color: ${theme.colors.secondary.dark};
 width: ${width};
 height: ${height};
 border: ${border};
@@ -31,7 +32,7 @@ display: flex;
 align-items: center;
 position: relative;
 padding: 5px 5px 5px 50px;
-@media (max-width: 768px) {
+@media (max-width: ${theme.breakpoints.tablet}) {
   width: 70%;
 }
 &:focus-within ul {
@@ -44,7 +45,7 @@ const SDropdownList = styled.ul`
   width: 100%;
   border-radius: 10px;
   position: absolute;
-  background-color: white;
+  background-color: ${theme.colors.secondary.dark};
   top: calc(100% + 2px);
   padding: 0;
   left: 0;
@@ -56,9 +57,9 @@ const SDropdownList = styled.ul`
 const SDropDownItem = styled.li`
   list-style: none;
   padding: 5px 50px;
-  border-bottom: solid 1px rgba(0,0,0,0.1);
+  border-bottom: solid 1px ${theme.colors.secondary.light};
   &:hover{
-    background-color: #F2C2BE;
+    background-color: ${theme.colors.primary};
     cursor:pointer;
   }
 }
