@@ -2,12 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SHeadline = styled.div(
-  ({ color, fontweight, fontsize }) =>
-    `
+  ({ color, fontweight, fontsize }) => `
   color:${color};
   fontweight:${fontweight};
-  ${fontsize};
-  `
+  ${fontsize};`
 );
 
 const setFontSize = (size) => {

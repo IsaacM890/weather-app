@@ -39,12 +39,12 @@ const SForecastListContainer = styled.div`
   }
 `;
 
-const ForecastList = (props) => {
+const ForecastList = ({ hourlyForcast }) => {
   return (
     <SForecastListContainer>
       <Headline text={'Forecast'} color={'white'} fontsize={'XMedium'} />
       <SCardcontainer>
-        {props.hourlyForcast.map((item) => {
+        {hourlyForcast.map((item) => {
           return (
             <Card
               margin={'3px'}

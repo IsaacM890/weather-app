@@ -19,24 +19,25 @@ const SSearchicon = styled.img`
   left: 5px;
 `;
 
-const SInputWrapper = styled.div`
-  margin: 80px auto 0;
-  background-color: white;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  border: ${(props) => props.border};
-  border-radius: ${(props) => props.radius};
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 5px 5px 5px 50px;
-  @media (max-width: 768px) {
-    width: 70%;
-  }
-  &:focus-within ul {
-    display: block;
-  }
-`;
+const SInputWrapper = styled.div(
+  ({ width, height, border, radius }) => `
+margin: 80px auto 0;
+background-color: white;
+width: ${width};
+height: ${height};
+border: ${border};
+border-radius: ${radius};
+display: flex;
+align-items: center;
+position: relative;
+padding: 5px 5px 5px 50px;
+@media (max-width: 768px) {
+  width: 70%;
+}
+&:focus-within ul {
+  display: block;
+}`
+);
 
 const SDropdownList = styled.ul`
   display: none;
@@ -63,12 +64,21 @@ const SDropDownItem = styled.li`
 }
 `;
 
-export default function Searchinput(props) {
-  const suggestions = props.autoCompleteList
-    ? props.autoCompleteList.map((item) => {
+export default function Searchinput({
+  autoCompleteList,
+  onSelectOption,
+  width,
+  height,
+  border,
+  radius,
+  onChange,
+  value,
+}) {
+  const suggestions = autoCompleteList
+    ? autoCompleteList.map((item) => {
         return (
           <SDropDownItem
-            onMouseDown={() => props.onSelectOption(item)}
+            onMouseDown={() => onSelectOption(item)}
             key={item.Key}
           >
             {item.LocalizedName}
@@ -78,16 +88,16 @@ export default function Searchinput(props) {
     : [];
   return (
     <SInputWrapper
-      width={props.width}
-      height={props.height}
-      border={props.border}
-      radius={props.radius}
+      width={width}
+      height={height}
+      border={border}
+      radius={radius}
     >
       <SSearchicon src={icon} alt='search icon' />
       <SSearchInput
-        onChange={props.onChange}
+        onChange={onChange}
         placeholder={'Search ... '}
-        value={props.value}
+        value={value}
       ></SSearchInput>
       <SDropdownList>{suggestions}</SDropdownList>
     </SInputWrapper>

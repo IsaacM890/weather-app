@@ -4,19 +4,20 @@ import Headline from '../Headline/Headline';
 import Caption from '../Caption/Caption';
 import helpersFuncs from '../../helpers/index';
 
-const SContainer = styled.div`
-  color: ${(props) => props.color};
-  display: flex;
-  & > div {
-    padding: 20px;
-  }
-  margin: 20px;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-  }
-  width: ${(props) => props.width};
-`;
+const SContainer = styled.div(
+  ({ color, width }) => `
+color: ${color};
+display: flex;
+& > div {
+  padding: 20px;
+}
+margin: 20px;
+@media (max-width: 768px) {
+  flex-direction: column;
+  align-items: center;
+}
+width: ${width};`
+);
 
 const SCloudIcon = styled.img`
   width: 120px;
@@ -34,21 +35,22 @@ const SGeneralForcast = styled.div`
   }
 `;
 
-const SExtendedForcast = styled.div`
-  width: 40%;
-  display: flex;
-  text-align: center;
-  span {
-    display: block;
-  }
-  align-items: center;
-  justify-content: space-between;
-  background-color: ${(props) => props.backgroundcolor};
-  border-radius: ${(props) => props.borderradius};
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+const SExtendedForcast = styled.div(
+  ({ backgroundcolor, borderradius }) => ` 
+width: 40%;
+display: flex;
+text-align: center;
+span {
+  display: block;
+}
+align-items: center;
+justify-content: space-between;
+background-color: ${backgroundcolor};
+border-radius: ${borderradius};
+@media (max-width: 768px) {
+  width: 100%;
+}`
+);
 
 const SCaptionWrapper = styled.div`
   display: flex;
