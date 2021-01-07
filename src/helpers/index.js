@@ -8,13 +8,26 @@ export const getDate = (datetime, type) => {
       hour: 'numeric',
       minute: 'numeric',
     },
+    longDate: {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+    },
   };
   const dateObj = new Date(datetime);
 
+  const longdate = new Date().toLocaleDateString('en-us', typePattern.longDate);
   const date = dateObj.toLocaleDateString('en-us', typePattern.date);
   const time = dateObj.toLocaleTimeString('en-us', typePattern.time);
 
-  return type === 'time' ? time : date;
+  switch (type) {
+    case 'time':
+      return time;
+    case 'date':
+      return date;
+    default:
+      return longdate;
+  }
 };
 
 export const getWeatherIcon = (icon) => {

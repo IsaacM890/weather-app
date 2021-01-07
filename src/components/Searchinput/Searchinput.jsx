@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import icon from '../../assets/images/search-icon-png-9982.png';
-import theme from '../../helpers/theme';
 
 const SSearchInput = styled.input`
   width: 100%;
@@ -21,7 +20,7 @@ const SSearchicon = styled.img`
 `;
 
 const SInputWrapper = styled.div(
-  ({ width, height, border, radius }) => `
+  ({ theme, width, height, border, radius }) => `
 margin: 80px auto 0;
 background-color: ${theme.colors.secondary.dark};
 width: ${width};
@@ -40,30 +39,33 @@ padding: 5px 5px 5px 50px;
 }`
 );
 
-const SDropdownList = styled.ul`
-  display: none;
-  width: 100%;
-  border-radius: 10px;
-  position: absolute;
-  background-color: ${theme.colors.secondary.dark};
-  top: calc(100% + 2px);
-  padding: 0;
-  left: 0;
-  margin: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-`;
+const SDropdownList = styled.ul(
+  ({ theme }) => `
+display: none;
+width: 100%;
+border-radius: 10px;
+position: absolute;
+background-color: ${theme.colors.secondary.dark};
+top: calc(100% + 2px);
+padding: 0;
+left: 0;
+margin: 0;
+box-sizing: border-box;
+overflow: hidden;
+`
+);
 
-const SDropDownItem = styled.li`
-  list-style: none;
-  padding: 5px 50px;
-  border-bottom: solid 1px ${theme.colors.secondary.light};
-  &:hover{
-    background-color: ${theme.colors.primary};
-    cursor:pointer;
-  }
+const SDropDownItem = styled.li(
+  ({ theme }) => `
+list-style: none;
+padding: 5px 50px;
+border-bottom: solid 1px ${theme.colors.secondary.light};
+&:hover{
+  background-color: ${theme.colors.primary};
+  cursor:pointer;
 }
-`;
+`
+);
 
 export default function Searchinput({
   autoCompleteList,

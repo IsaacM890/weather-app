@@ -11,6 +11,7 @@ import {
   DailyForcastAPI,
   HourlyForecastAPI,
 } from '../api/index';
+import helpersFuncs from '../helpers/index';
 
 const SLocationBox = styled.div`
   margin-top: 50px;
@@ -23,9 +24,6 @@ const SPageContainer = styled.div`
 `;
 
 const WeatherPage = () => {
-  const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
-  const date = new Date().toLocaleDateString('en-us', dateOptions);
-
   const [autoCompleteList, setautoCompleteList] = useState([]);
   const [selectedSearchInputValue, setselectedSearchInputValue] = useState('');
   const [selectedLocation, setselectedLocation] = useState({});
@@ -92,7 +90,11 @@ const WeatherPage = () => {
               fontsize={'Large'}
               fontweight={'bold'}
             />
-            <Headline color={'white'} text={date} fontsize={'Medium'} />
+            <Headline
+              color={'white'}
+              text={helpersFuncs.getDate()}
+              fontsize={'Medium'}
+            />
           </SLocationBox>
           <CurrentForcast
             dailyForcast={dailyForcast}

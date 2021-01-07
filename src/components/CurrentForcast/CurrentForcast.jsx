@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import Headline from '../Headline/Headline';
 import Caption from '../Caption/Caption';
 import helpersFuncs from '../../helpers/index';
-import theme from '../../helpers/theme';
 
 const SContainer = styled.div(
-  ({ color, width }) => `
+  ({ theme, color, width }) => `
 color: ${color};
 display: flex;
 & > div {
@@ -26,18 +25,20 @@ const SCloudIcon = styled.img`
   margin-right: 20px;
 `;
 
-const SGeneralForcast = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    width: 100%;
-  }
-`;
+const SGeneralForcast = styled.div(
+  ({ theme }) => `
+display: flex;
+align-items: center;
+justify-content: center;
+width: 50%;
+@media (max-width: ${theme.breakpoints.tablet}) {
+  width: 100%;
+}
+`
+);
 
 const SExtendedForcast = styled.div(
-  ({ backgroundcolor, borderradius }) => ` 
+  ({ theme, backgroundcolor, borderradius }) => ` 
 width: 40%;
 display: flex;
 text-align: center;
@@ -60,15 +61,16 @@ const SCaptionWrapper = styled.div`
   height: 100%;
 `;
 
-const SCaptionGroup = styled.div`
-  align-items: center;
-  flex-direction: column;
-  &:first-child {
-    @media (max-width: ${theme.breakpoints.tablet}) {
-      margin-bottom: 1rem;
-    }
+const SCaptionGroup = styled.div(
+  ({ theme }) => `
+align-items: center;
+flex-direction: column;
+&:first-child {
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    margin-bottom: 1rem;
   }
-`;
+}`
+);
 
 const CurrentForcast = ({
   color,
