@@ -5,13 +5,13 @@ import Header from '../components/Header/Header';
 import Searchinput from '../components/Searchinput/Searchinput';
 import ForecastList from '../components/ForecastList/ForecastList';
 import CurrentForcast from '../components/CurrentForcast/CurrentForcast';
+import helpersFuncs from '../helpers/index';
 import {
   AutoCompleteListAPI,
   CurrentConditionsAPI,
   DailyForcastAPI,
   HourlyForecastAPI,
 } from '../api/index';
-import helpersFuncs from '../helpers/index';
 
 const SLocationBox = styled.div`
   margin-top: 50px;

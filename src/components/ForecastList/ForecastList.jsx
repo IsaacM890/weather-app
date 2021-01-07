@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Headline from '../Headline/Headline';
 import Card from '../Card/Card';
-import theme from '../../style/theme';
 
 const SCardcontainer = styled.div(
   ({ theme }) => `
@@ -57,7 +56,6 @@ const ForecastList = ({ hourlyForcast }) => {
               width={' 110px'}
               min-width={' 110px'}
               height={'18vh'}
-              backgroundcolor={theme.colors.secondary.medium}
               key={item.DateTime}
               item={item}
             />

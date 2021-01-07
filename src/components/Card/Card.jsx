@@ -4,10 +4,10 @@ import Caption from '../Caption/Caption';
 import helpersFuncs from '../../helpers/index';
 
 const SCard = styled.div(
-  ({ backgroundcolor, borderradius, margin, width, minwidth, height }) => `
+  ({ theme, borderradius, margin, width, minwidth, height }) => `
 display: flex;
 text-align: center;
-background-color: ${backgroundcolor};
+background-color: ${theme.colors.secondary.medium};
 border-radius: ${borderradius};
 margin: ${margin};
 width: ${width};
@@ -35,7 +35,6 @@ const SCardIcon = styled.img`
   height: 30px;
 `;
 const Card = ({
-  backgroundcolor,
   borderradius,
   margin,
   width,
@@ -46,7 +45,6 @@ const Card = ({
   return (
     <div>
       <SCard
-        backgroundcolor={backgroundcolor}
         borderradius={borderradius}
         margin={margin}
         width={width}

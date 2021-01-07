@@ -15,7 +15,6 @@ export const getDate = (datetime, type) => {
     },
   };
   const dateObj = new Date(datetime);
-
   const longdate = new Date().toLocaleDateString('en-us', typePattern.longDate);
   const date = dateObj.toLocaleDateString('en-us', typePattern.date);
   const time = dateObj.toLocaleTimeString('en-us', typePattern.time);
