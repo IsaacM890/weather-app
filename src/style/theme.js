@@ -15,6 +15,7 @@ const theme = {
     mobile: '320px',
     tablet: '768px',
     desktop: '1224px',
+    scrollBreak:'1450px',
   },
 };
 

@@ -9,7 +9,7 @@ display: flex;
 width: 100%;
 overflow-x: hidden;
 overflow-y: hidden;
-@media (max-width: 1450px) {
+@media (max-width: ${theme.breakpoints.scrollBreak}) {
   overflow-x: scroll;
   overflow-y: hidden;
   &::-webkit-scrollbar-track {
