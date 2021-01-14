@@ -12,7 +12,7 @@ const SSearchInput = styled.input`
   font-size: 14px;
 `;
 
-const SSearchicon = styled.img`
+const SSearchIcon = styled.img`
   width: 20px;
   height: 20px;
   position: absolute;
@@ -96,7 +96,7 @@ export default function Searchinput({
       border={border}
       radius={radius}
     >
-      <SSearchicon src={icon} alt='search icon' />
+      <SSearchIcon src={icon} alt='search icon' />
       <SSearchInput
         onChange={onChange}
         placeholder={'Search ... '}

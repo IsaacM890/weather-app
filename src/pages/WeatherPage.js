@@ -13,12 +13,15 @@ import {
   HourlyForecastAPI,
 } from '../api/index';
 
-const SLocationBox = styled.div`
-  margin-top: 50px;
-  @media (max-width: 768px) {
-    text-align: center;
-  }
-`;
+const SLocationBox = styled.div(
+  ({ theme }) => `
+margin-top: 50px;
+@media (max-width: ${theme.breakpoints.tablet}) {
+  text-align: center;
+}
+`
+);
+
 const SPageContainer = styled.div`
   margin: 0 20px 20px;
 `;
@@ -30,7 +33,7 @@ const WeatherPage = () => {
   const [currentconditions, setcurrentconditions] = useState({});
   const [dailyForcast, setdailyForcast] = useState({});
   const [hourlyForcast, sethourlyForcast] = useState({});
-  const [isDone, setisDone] = useState(false);
+  const [isDoneFetch, setisDoneFetch] = useState(false);
 
   const onChange = async (e) => {
     setselectedSearchInputValue(e.target.value);
@@ -44,7 +47,7 @@ const WeatherPage = () => {
     await getHourlyForecasts(option.Key);
     setselectedSearchInputValue(option.LocalizedName);
     setselectedLocation(option);
-    setisDone(true);
+    setisDoneFetch(true);
   };
 
   const getCurrentForecast = async (key) => {
@@ -77,7 +80,7 @@ const WeatherPage = () => {
         onSelectOption={onSelectOption}
         value={selectedSearchInputValue}
       />
-      {isDone ? (
+      {isDoneFetch ? (
         <>
           <SLocationBox>
             <Headline
