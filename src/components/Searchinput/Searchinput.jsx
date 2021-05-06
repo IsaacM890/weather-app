@@ -33,9 +33,49 @@ const SInputWrapper = styled.div`
   @media (max-width: 768px) {
     width: 70%;
   }
+  &:focus-within ul {
+    display: block;
+  }
+`;
+
+const SDropdownList = styled.ul`
+  display: none;
+  width: 100%;
+  border-radius: 10px;
+  position: absolute;
+  background-color: white;
+  top: calc(100% + 2px);
+  padding: 0;
+  left: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+`;
+
+const SDropDownItem = styled.li`
+  list-style: none;
+  padding: 5px 50px;
+  border-bottom: solid 1px rgba(0,0,0,0.1);
+  &:hover{
+    background-color: #F2C2BE;
+    cursor:pointer;
+  }
+}
 `;
 
 export default function Searchinput(props) {
+  const suggestions = props.autoCompleteList
+    ? props.autoCompleteList.map((item, index) => {
+        return (
+          <SDropDownItem
+            onMouseDown={() => props.onSelectOption(item)}
+            key={index}
+          >
+            {item.LocalizedName}
+          </SDropDownItem>
+        );
+      })
+    : [];
   return (
     <SInputWrapper
       width={props.width}
@@ -44,7 +84,13 @@ export default function Searchinput(props) {
       radius={props.radius}
     >
       <SSearchicon src={icon} alt='search icon' />
-      <SSearchinput placeholder={'Type Here ... '}></SSearchinput>
+      <SSearchinput
+        onKeyPress={props.onKeyPress}
+        onChange={props.onChange}
+        placeholder={'Type Here ... '}
+        value={props.value}
+      ></SSearchinput>
+      <SDropdownList>{suggestions}</SDropdownList>
     </SInputWrapper>
   );
 }

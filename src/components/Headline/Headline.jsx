@@ -1,16 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const SHeadline = styled.div`
   color: ${(props) => props.color};
   text: ${(props) => props.text};
   font-weight: ${(props) => props.fontweight};
   margin: ${(props) => props.margin};
-  font-size:${(props)=>props.fontsize}
+  font-size: ${(props) => props.fontsize};
 `;
 
-const Headline =({ color, text, fontweight, fontsize, margin ,degree})=> {
+const Headline = ({
+  color,
+  text,
+  fontweight,
+  fontsize,
+  margin,
+  degree,
+}) => {
   const degreeSymbol = degree ? '°' : '';
   return (
     <SHeadline
@@ -19,10 +25,10 @@ const Headline =({ color, text, fontweight, fontsize, margin ,degree})=> {
       margin={margin}
       fontsize={fontsize}
     >
-      {text}
+      {text} 
       {degreeSymbol}
     </SHeadline>
   );
-}
+};
 
 export default Headline;
