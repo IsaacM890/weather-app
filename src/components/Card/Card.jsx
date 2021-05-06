@@ -1,31 +1,73 @@
 import React from 'react';
 import styled from 'styled-components';
+import Caption from '../Caption/Caption';
+import helpersFuncs from '../../helpers/index';
 
-const SCard = styled.div`
-  display: flex;
-  text-align: center;
-  background-color: ${(props) => props.backgroundcolor};
-  border-radius: ${(props) => props.borderradius};
-  margin:${(props) => props.margin};
-  width:${(props) => props.width}; 
-  min-width: ${(props) => props.minwidth}; 
-  height:${(props) => props.height};
-  justify-content: space-between;
-  
+const SCard = styled.div(
+  ({ theme, borderradius, margin, width, minwidth, height }) => `
+display: flex;
+text-align: center;
+background-color: ${theme.colors.secondary.medium};
+border-radius: ${borderradius};
+margin: ${margin};
+width: ${width};
+min-width: ${minwidth};
+height: ${height};
+justify-content: space-between;
+`
+);
+
+const SCaptionGroup = styled.div`
+  margin-top: 5px;
 `;
 
-const Card = (props) => {
+const SCaptionBox = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 10px;
+`;
+
+const SCardIcon = styled.img`
+  display: flex;
+  height: 30px;
+`;
+const Card = ({
+  borderradius,
+  margin,
+  width,
+  minwidth,
+  height,
+  item,
+}) => {
   return (
     <div>
       <SCard
-        backgroundcolor={props.backgroundcolor}
-        borderradius={props.borderradius}
-        margin={props.margin}
-        width={props.width}
-        minwidth={props.minwidth}
-        height={props.height}
+        borderradius={borderradius}
+        margin={margin}
+        width={width}
+        minwidth={minwidth}
+        height={height}
       >
-        {props.children}
+        <SCaptionBox>
+          <SCaptionGroup>
+            <Caption
+              color={'white'}
+              text={helpersFuncs.getDate(item.DateTime, 'date')}
+            />
+            <Caption
+              color={'white'}
+              text={helpersFuncs.getDate(item.DateTime, 'time')}
+            />
+          </SCaptionGroup>
+          <SCardIcon
+            src={helpersFuncs.getWeatherIcon(item.WeatherIcon)}
+            alt={'icon'}
+          />
+          <Caption color={'white'} text={item.Temperature.Value} degree />
+        </SCaptionBox>
       </SCard>
     </div>
   );

@@ -1,31 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SHeadline = styled.div`
-  color: ${(props) => props.color};
-  text: ${(props) => props.text};
-  font-weight: ${(props) => props.fontweight};
-  margin: ${(props) => props.margin};
-  font-size: ${(props) => props.fontsize};
-`;
+const SHeadline = styled.div(
+  ({ color, fontweight, fontsize }) => `
+  color:${color};
+  fontweight:${fontweight};
+  ${fontsize};`
+);
 
-const Headline = ({
-  color,
-  text,
-  fontweight,
-  fontsize,
-  margin,
-  degree,
-}) => {
+const setFontSize = (size) => {
+  switch (size) {
+    case 'XLarge':
+      return 'font-size:70px';
+    case 'Large':
+      return 'font-size:45px';
+    case 'XMedium':
+      return 'font-size:28px';
+    case 'Medium':
+      return 'font-size:20px';
+    case 'Small':
+      return 'font-size:18px';
+
+    default:
+      return 'font-size:16px';
+  }
+};
+
+const Headline = ({ color, text, fontweight, fontsize, degree }) => {
   const degreeSymbol = degree ? '°' : '';
   return (
     <SHeadline
       color={color}
       fontweight={fontweight}
-      margin={margin}
-      fontsize={fontsize}
+      fontsize={setFontSize(fontsize)}
     >
-      {text} 
+      {text}
       {degreeSymbol}
     </SHeadline>
   );

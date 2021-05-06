@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import icon from '../../assets/images/search-icon-png-9982.png';
 
-const SSearchinput = styled.input`
+const SSearchInput = styled.input`
   width: 100%;
   height: 100%;
   border: none;
@@ -12,64 +12,77 @@ const SSearchinput = styled.input`
   font-size: 14px;
 `;
 
-const SSearchicon = styled.img`
+const SSearchIcon = styled.img`
   width: 20px;
   height: 20px;
   position: absolute;
-  left: 5px;
+  left: 10px;
 `;
 
-const SInputWrapper = styled.div`
-  margin: 80px auto 0;
-  background-color: white;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  border: ${(props) => props.border};
-  border-radius: ${(props) => props.radius};
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 5px 5px 5px 50px;
-  @media (max-width: 768px) {
-    width: 70%;
-  }
-  &:focus-within ul {
-    display: block;
-  }
-`;
-
-const SDropdownList = styled.ul`
-  display: none;
-  width: 100%;
-  border-radius: 10px;
-  position: absolute;
-  background-color: white;
-  top: calc(100% + 2px);
-  padding: 0;
-  left: 0;
-  margin: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-`;
-
-const SDropDownItem = styled.li`
-  list-style: none;
-  padding: 5px 50px;
-  border-bottom: solid 1px rgba(0,0,0,0.1);
-  &:hover{
-    background-color: #F2C2BE;
-    cursor:pointer;
-  }
+const SInputWrapper = styled.div(
+  ({ theme, width, height, border, radius }) => `
+margin: 80px auto 0;
+background-color: ${theme.colors.secondary.dark};
+width: ${width};
+height: ${height};
+border: ${border};
+border-radius: ${radius};
+display: flex;
+align-items: center;
+position: relative;
+padding: 5px 5px 5px 50px;
+@media (max-width: ${theme.breakpoints.tablet}) {
+  width: 70%;
 }
-`;
+&:focus-within ul {
+  display: block;
+}`
+);
 
-export default function Searchinput(props) {
-  const suggestions = props.autoCompleteList
-    ? props.autoCompleteList.map((item, index) => {
+const SDropdownList = styled.ul(
+  ({ theme }) => `
+display: none;
+width: 100%;
+border-radius: 10px;
+position: absolute;
+background-color: ${theme.colors.secondary.dark};
+top: calc(100% + 2px);
+padding: 0;
+left: 0;
+margin: 0;
+box-sizing: border-box;
+overflow: hidden;
+`
+);
+
+const SDropDownItem = styled.li(
+  ({ theme }) => `
+list-style: none;
+padding: 5px 50px;
+border-bottom: solid 1px ${theme.colors.secondary.light};
+&:hover{
+  background-color: ${theme.colors.primary};
+  cursor:pointer;
+}
+`
+);
+
+export default function Searchinput({
+  autoCompleteList,
+  onSelectOption,
+  width,
+  height,
+  border,
+  radius,
+  onChange,
+  value,
+}) {
+  const suggestions = autoCompleteList
+    ? autoCompleteList.map((item) => {
         return (
           <SDropDownItem
-            onMouseDown={() => props.onSelectOption(item)}
-            key={index}
+            onMouseDown={() => onSelectOption(item)}
+            key={item.Key}
           >
             {item.LocalizedName}
           </SDropDownItem>
@@ -78,18 +91,17 @@ export default function Searchinput(props) {
     : [];
   return (
     <SInputWrapper
-      width={props.width}
-      height={props.height}
-      border={props.border}
-      radius={props.radius}
+      width={width}
+      height={height}
+      border={border}
+      radius={radius}
     >
-      <SSearchicon src={icon} alt='search icon' />
-      <SSearchinput
-        onKeyPress={props.onKeyPress}
-        onChange={props.onChange}
-        placeholder={'Type Here ... '}
-        value={props.value}
-      ></SSearchinput>
+      <SSearchIcon src={icon} alt='search icon' />
+      <SSearchInput
+        onChange={onChange}
+        placeholder={'Search ... '}
+        value={value}
+      ></SSearchInput>
       <SDropdownList>{suggestions}</SDropdownList>
     </SInputWrapper>
   );
