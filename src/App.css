@@ -1,7 +1,10 @@
+/** @format */
+
 body {
   background-image: url('assets/images/background.jpeg');
   background-size: cover;
   background-attachment: fixed;
   width: 100vw;
   height: 100vh;
+  
 }
