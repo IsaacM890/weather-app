@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+/** @format */
+
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Headline from '../components/Headline/Headline';
 import Header from '../components/Header/Header';
 import Searchinput from '../components/Searchinput/Searchinput';
 import ForecastList from '../components/ForecastList/ForecastList';
 import CurrentForcast from '../components/CurrentForcast/CurrentForcast';
+import debounce from 'lodash.debounce';
 import helpersFuncs from '../helpers/index';
 import {
   AutoCompleteListAPI,
@@ -35,9 +38,16 @@ const WeatherPage = () => {
   const [hourlyForcast, sethourlyForcast] = useState({});
   const [isDoneFetch, setisDoneFetch] = useState(false);
 
+  const debouncedSave = useCallback(
+    debounce((nextValue) => AutoCompleteListAPI(nextValue), 1000),
+    []
+  );
+
   const onChange = async (e) => {
-    setselectedSearchInputValue(e.target.value);
-    const response = await AutoCompleteListAPI(e.target.value);
+    const nextValue = e.target.value;
+    setselectedSearchInputValue(nextValue);
+    debouncedSave(nextValue);
+    const response = await AutoCompleteListAPI(nextValue);
     setautoCompleteList(response.data);
   };
 
