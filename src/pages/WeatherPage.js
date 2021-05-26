@@ -44,7 +44,6 @@ const WeatherPage = () => {
   );
 
   const getAutoComplete = async (value) => {
-    console.log('autocomplete');
     const response = await AutoCompleteListAPI(value);
     setautoCompleteList(response.data);
   };
