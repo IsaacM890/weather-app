@@ -1,3 +1,6 @@
+/** @format */
+
+const API_KEY = 'WLPjmpTw1wszfd1kUnFEpglC8AQeQE7F';
 export const baseURL = {
   autocompleteSearchURL: `http://dataservice.accuweather.com/locations/v1/cities/autocomplete`,
   currentConditionsURL: `http://dataservice.accuweather.com/currentconditions/v1/`,
@@ -6,6 +9,6 @@ export const baseURL = {
 };
 
 export const endPoints = {
-  searchPoint: `?apikey=${process.env.REACT_APP_API_KEY}&q=`,
-  basic: `?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`,
+  searchPoint: `?apikey=${API_KEY}&q=`,
+  basic: `?apikey=${API_KEY}&details=true&metric=true`,
 };
