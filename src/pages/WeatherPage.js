@@ -38,17 +38,20 @@ const WeatherPage = () => {
   const [hourlyForcast, sethourlyForcast] = useState({});
   const [isDoneFetch, setisDoneFetch] = useState(false);
 
-  const debouncedSave = useCallback(
-    debounce((nextValue) => AutoCompleteListAPI(nextValue), 1000),
+  const debounceAutoComplete = useCallback(
+    debounce((nextValue) => getAutoComplete(nextValue), 500),
     []
   );
 
+  const getAutoComplete = async (value) => {
+    console.log('autocomplete');
+    const response = await AutoCompleteListAPI(value);
+    setautoCompleteList(response.data);
+  };
   const onChange = async (e) => {
     const nextValue = e.target.value;
     setselectedSearchInputValue(nextValue);
-    debouncedSave(nextValue);
-    const response = await AutoCompleteListAPI(nextValue);
-    setautoCompleteList(response.data);
+    debounceAutoComplete(nextValue);
   };
 
   const onSelectOption = async (option) => {
