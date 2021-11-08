@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react';
 import styled from 'styled-components';
 import Caption from '../Caption/Caption';
@@ -34,14 +36,7 @@ const SCardIcon = styled.img`
   display: flex;
   height: 30px;
 `;
-const Card = ({
-  borderradius,
-  margin,
-  width,
-  minwidth,
-  height,
-  item,
-}) => {
+const Card = ({ borderradius, margin, width, minwidth, height, item }) => {
   return (
     <div>
       <SCard

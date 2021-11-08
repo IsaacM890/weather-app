@@ -1,3 +1,5 @@
+/** @format */
+
 export const getDate = (datetime, type) => {
   const typePattern = {
     date: {
@@ -29,7 +31,7 @@ export const getDate = (datetime, type) => {
   }
 };
 
-export const getWeatherIcon = (icon) => {
+const getWeatherIcon = (icon) => {
   return `http://vortex.accuweather.com/adc2010/images/slate/icons/${icon}.svg`;
 };
 
