@@ -1,6 +1,6 @@
 /** @format */
 
-const API_KEY = 'cucTY4zNvv1Nb2mHLDu0YRT31fGmNKoW';
+const API_KEY = 'mIr5ylGWeTGYqkQ8RmGUxEX6zELpSOxK';
 
 export const baseURL = {
   autocompleteSearchURL: `https://dataservice.accuweather.com/locations/v1/cities/autocomplete`,
